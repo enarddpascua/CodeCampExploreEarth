@@ -26,12 +26,25 @@ public class PlanetTestSuite {
     public void explorePlanetTest() throws NotFoundException {
         // Arrange
         new Toolbar(driver).goToPlanets();
+
         // Act
         new PlanetsPage(driver).getPlanet(p -> p.getPlanetName().
                 equalsIgnoreCase("Earth")).clickExplore();
 
         // Assert
         Assertions.assertEquals("Exploring Earth", new Popup(driver).getPopupMessage());
+    }
+
+    @Test
+    public void exploreDistance(){
+        // Arrange
+        new Toolbar(driver).goToPlanets();
+
+        // Act
+        new PlanetsPage(driver).getPlanet(p -> p.getDistance() == 227900000).clickExplore();
+
+        // Assert
+        Assertions.assertEquals("Exploring Mars", new Popup(driver).getPopupMessage());
     }
 
     @AfterEach
